@@ -14,3 +14,7 @@ Linux 有两种含义，一种是 Linus 编写的开源操作系统的内核，�
 
 RedHat Enterprise Linux / Fedora / CentOS / Debian / Ubuntu
 
+### 05 | 安装 VirtualBox 虚拟机
+
+[Download VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+

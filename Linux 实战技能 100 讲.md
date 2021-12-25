@@ -126,3 +126,18 @@ su - root
 **du** -sh folder 可以查看文件夹总大小
 
 du -sh folder/* 可以查看文件夹下子文件夹和文件大小
+
+### 11 | 详解 cd 命令
+
+内部命令的 man 帮助会变成 bash 帮助
+
+```shell
+help cd
+```
+
+回到上一次执行了 cd 的目录
+
+```shell
+cd -
+```
+

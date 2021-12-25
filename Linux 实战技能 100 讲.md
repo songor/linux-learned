@@ -172,3 +172,28 @@ remove empty directories
 **mv**
 
 **通配符 * ?**
+
+### 14 | 如何在 Linux 下进行文本查看
+
+**cat**
+
+**head**
+
+-n print the first K lines instead of the first 10
+
+**tail**
+
+-n output the last K lines, instead of the last 10
+
+-f output appended data as the file grows
+
+**wc**
+
+Print newline, word, and byte counts for each FILE, and a total line if more than one FILE is specified.
+
+-l print the newline counts
+
+**more**
+
+**less**
+

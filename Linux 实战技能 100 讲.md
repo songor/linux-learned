@@ -121,3 +121,8 @@ cd ./path/to/ & cd ../path/to/ 绝对路径
 su - root
 ```
 
+### 10 | 详解 ls 命令
+
+**du** -sh folder 可以查看文件夹总大小
+
+du -sh folder/* 可以查看文件夹下子文件夹和文件大小

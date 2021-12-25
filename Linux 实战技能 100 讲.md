@@ -42,3 +42,54 @@ RedHat Enterprise Linux / Fedora / CentOS / Debian / Ubuntu
 
 /usr/bin 放用户需要执行的命令；/usr/sbin 放系统运行不必须的命令。
 
+### 08 | 万能的帮助命令：man、help、info
+
+**man**
+
+```shell
+yum install -y man-pages
+```
+
+```shell
+man man
+DESCRIPTION
+       The default action is to search in all of the available sections, following a pre-defined order and to show only the first page found, even if page exists in several sections.
+       1   Executable programs or shell commands
+       2   System calls (functions provided by the kernel)
+       3   Library calls (functions within program libraries)
+       4   Special files (usually found in /dev)
+       5   File formats and conventions eg /etc/passwd
+       6   Games
+       7   Miscellaneous (including macro packages and conventions), e.g. man(7), groff(7)
+       8   System administration commands (usually only for root)
+       9   Kernel routines [Non standard]
+```
+
+```shell
+man ls
+man 1 passwd
+man 5 passwd
+man -a passwd
+```
+
+**help**
+
+shell（命令解释器）自带的命令是内部命令，其他的是外部命令。
+
+```shell
+-- 内部命令
+type cd
+help cd
+-- 外部命令
+type ls
+ls --help
+```
+
+**info**
+
+info 比 help 更详细，作为 help 的补充。
+
+```shell
+info ls
+```
+

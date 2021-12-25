@@ -18,3 +18,7 @@ RedHat Enterprise Linux / Fedora / CentOS / Debian / Ubuntu
 
 [Download VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
+### 06 | 在虚拟机中安装 Linux 系统
+
+[Download CentOS](http://mirrors.aliyun.com/centos/7/isos/x86_64/)
+

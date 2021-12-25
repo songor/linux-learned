@@ -157,3 +157,18 @@ remove empty directories
 
 -f ignore nonexistent files and arguments, never prompt
 
+### 13 | 复制和移动目录
+
+**cp**
+
+-r 复制目录
+
+-v explain what is being done
+
+-p same as --preserve=mode,ownership,timestamps. preserve the specified attributes (default: mode, ownership, timestamps)
+
+-a same as -dR --preserve=all
+
+**mv**
+
+**通配符 * ?**

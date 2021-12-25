@@ -141,3 +141,19 @@ help cd
 cd -
 ```
 
+### 12 | 创建和删除目录
+
+**mkdir**
+
+-p 多极目录
+
+**rmdir**
+
+remove empty directories
+
+**rm**
+
+-r remove directories and their contents recursively
+
+-f ignore nonexistent files and arguments, never prompt
+

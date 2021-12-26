@@ -197,3 +197,55 @@ Print newline, word, and byte counts for each FILE, and a total line if more tha
 
 **less**
 
+### 15 | 打包压缩和解压缩
+
+**打包（备份）**
+
+tar
+
+打包只将目录转换成文件，这是磁带备份的概念，沿用到现代系统。
+
+```shell
+tar -cf /tmp/etc-backup.tar /etc
+```
+
+```shell
+tar -czf /tmp/etc-backup.tar.gz /etc
+```
+
+```shell
+tar -cjf /tmp/etc-backup.tar.bz2 /etc
+```
+
+-c create a new archive
+
+-j bzip2
+
+-z gzip
+
+```shell
+tar -xf /tmp/etc-backup.tar -C /root
+```
+
+```shell
+tar -zxf /tmp/etc-backup.tar.gz -C /root
+```
+
+```shell
+tar -jxf /tmp/etc-backup.tar.bz2 -C /root
+```
+
+-x extract files from an archive
+
+-C change to directory DIR
+
+**压缩与解压缩**
+
+gzip / bzip2
+
+只能对一个文件压缩，不能对目录压缩。
+
+**扩展名**
+
+.tar.gz & .tgz / .tar.bz2 & .tbz2
+

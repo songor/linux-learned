@@ -313,7 +313,7 @@ r 替换单个字符
 
 :q / :q! 退出
 
-:!\<command\> 执行命令
+:!\<command\> :r !ifconfig
 
 /\<keyword\> + n 向下搜索
 
@@ -328,6 +328,10 @@ r 替换单个字符
 :%s/\<new word\>/\<old word\>/g 替换全局（每行）全部匹配
 
 :\<start line\>,\<end line\>s/\<new word\>/\<old word\>/g 替换指定行全部匹配
+
+:%s@/@//@g 将 / 替换成 //
+
+vim a.txt b.txt :next 下一个文件 :prev 上一个文件
 
 **/etc/vimrc**
 

@@ -366,6 +366,10 @@ tail -5 /etc/shadow
 
 -m create the user's home directory if it does not exist
 
+-g the group name or number of the user's initial login group
+
+-G a list of supplementary groups which the user is also a member of
+
 **userdel** 删除用户
 
 ```shell
@@ -434,4 +438,32 @@ sudo /usr/sbin/shutdown -c
 ```
 
 **visudo** /etc/sudoers
+
+### 22 | 用户和用户组的配置文件介绍
+
+```shell
+vim /etc/passwd
+<user name>:x:<uid>:<gid>:<comment>:<user login directory>:/bin/bash
+-- x 是否需要密码验证
+-- /sbin/nologin 不能从终端登录，但是可以使用 ftp、samba 这些服务
+```
+
+```shell
+vim /etc/shadow
+<user name>:<encrypted password>:...
+
+-- !! 新添加的用户没有设置密码
+postfix:!!:18088::::::
+-- * 无法验证密码
+mail:*:17834:0:99999:7:::
+```
+
+```shell
+vim /etc/group
+mail:x:12:postfix
+<group name>:x:<gid>:<user list>
+
+id postfix
+uid=89(postfix) gid=89(postfix) groups=89(postfix),12(mail)
+```
 

@@ -77,10 +77,10 @@ man -a passwd
 shell（命令解释器）自带的命令是内部命令，其他的是外部命令。
 
 ```shell
--- 内部命令
+# 内部命令
 type cd
 help cd
--- 外部命令
+# 外部命令
 type ls
 ls --help
 ```
@@ -357,7 +357,7 @@ d 块删除
 
 ```shell
 useradd wilson
--- 验证
+# 验证
 id wilson
 ls -a /home/wilson
 tail -5 /etc/passwd
@@ -444,17 +444,17 @@ sudo /usr/sbin/shutdown -c
 ```shell
 vim /etc/passwd
 <user name>:x:<uid>:<gid>:<comment>:<user login directory>:/bin/bash
--- x 是否需要密码验证
--- /sbin/nologin 不能从终端登录，但是可以使用 ftp、samba 这些服务
+# x 是否需要密码验证
+# /sbin/nologin 不能从终端登录，但是可以使用 ftp、samba 这些服务
 ```
 
 ```shell
 vim /etc/shadow
 <user name>:<encrypted password>:...
 
--- !! 新添加的用户没有设置密码
+# !! 新添加的用户没有设置密码
 postfix:!!:18088::::::
--- * 无法验证密码
+# * 无法验证密码
 mail:*:17834:0:99999:7:::
 ```
 
@@ -508,7 +508,7 @@ chmod 644 a.txt
 ```shell
 umask
 0022
--- 普通文件默认权限
+# 普通文件默认权限
 644 = 666 - 022
 ```
 
@@ -521,4 +521,31 @@ chown [OPTION]... [OWNER][:[GROUP]] FILE...
 **chgrp** 更改属组，不常用
 
 ctrl + r 查找之前执行过的命令
+
+### 25 | 权限管理以及文件的特殊权限
+
+属主权限和属组权限冲突时，以属主权限为准。
+
+**SUID** 用于二进制可执行文件，执行命令时取得文件属主权限
+
+```shell
+ls -l /usr/bin/passwd
+-rwsr-xr-x. 1 root root 27832 Jun 10  2014 /usr/bin/passwd
+
+ls -l /etc/shadow
+---------- 1 root root 728 Dec 26 21:26 /etc/shadow
+
+chmod 4755 -> -rwsr-xr-x
+```
+
+**SGID** 用于目录，在该目录下创建新的文件和目录，权限自动更改为该目录的属组
+
+**SBIT** 用于目录，在该目录下创建的文件和目录，仅 root 和自己可以删除
+
+```shell
+ls -ld /tmp
+drwxrwxrwt. 8 root root 4096 Dec 26 12:47 /tmp
+
+chmod 1777 -> drwxrwxrwt
+```
 

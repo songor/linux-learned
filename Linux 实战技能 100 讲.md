@@ -489,3 +489,36 @@ rx 显示目录内的文件名
 
 wx 修改目录内的文件名
 
+### 24 | 文件权限的修改方法和数字表示方法
+
+**chmod** 修改文件、目录权限
+
+```shell
+[ugoa...][[+-=][perms...]...]
+chmod u+x a.txt
+chmod g-r a.txt
+chmod o=w a.txt
+chmod a+r a.txt
+```
+
+```shell
+chmod 644 a.txt
+```
+
+```shell
+umask
+0022
+-- 普通文件默认权限
+644 = 666 - 022
+```
+
+**chown** 更改属主、属组
+
+```shell
+chown [OPTION]... [OWNER][:[GROUP]] FILE...
+```
+
+**chgrp** 更改属组，不常用
+
+ctrl + r 查找之前执行过的命令
+

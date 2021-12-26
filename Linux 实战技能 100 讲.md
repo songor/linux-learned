@@ -307,3 +307,27 @@ x 删除单个字符
 
 r 替换单个字符
 
+### 18 | Vim 的命令模式
+
+:w / :w \<filename\> 保存
+
+:q / :q! 退出
+
+:!\<command\> 执行命令
+
+/\<keyword\> + n 向下搜索
+
+/\<keyword\> + N 向上搜索
+
+:s/\<new word\>/\<old word\> 替换光标所在行一个匹配
+
+:s/\<new word\>/\<old word\>/g 替换光标所在行全部匹配
+
+:%s/\<new word\>/\<old word\> 替换全局（每行）一个匹配
+
+:%s/\<new word\>/\<old word\>/g 替换全局（每行）全部匹配
+
+:\<start line\>,\<end line\>s/\<new word\>/\<old word\>/g 替换指定行全部匹配
+
+**/etc/vimrc**
+

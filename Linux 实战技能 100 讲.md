@@ -348,3 +348,72 @@ I 块插入
 d 块删除
 
 :set nohlsearch 去除高亮
+
+### 20 | 用户和用户组管理及密码管理
+
+**用户管理**
+
+**useradd** 新建用户
+
+```shell
+useradd wilson
+-- 验证
+id wilson
+ls -a /home/wilson
+tail -5 /etc/passwd
+tail -5 /etc/shadow
+```
+
+-m create the user's home directory if it does not exist
+
+**userdel** 删除用户
+
+```shell
+userdel -r wilson
+```
+
+-r files in the user's home directory will be removed along with the home directory itself
+
+**passwd** 修改用户密码
+
+```shell
+passwd wilson
+```
+
+**usermod** 修改用户属性
+
+-d the user's new login directory
+
+```shell
+usermod -d /home/<new user directory> <user>
+mv /home/<old user directory> /home/<new user directory>
+chown -R <user>:<user group> /home/<new user directory>
+```
+
+**chage** 修改用户属性（change user password expiry information）
+
+**su** 临时用户切换
+
+\-  starts the shell as login shell with an environment similar to a real login
+
+```shell
+su - <user>
+su - root
+```
+
+**组管理**
+
+**groupadd** 新建用户组
+
+```shell
+groupadd <group>
+useradd <user>
+usermod -g <group> <user>
+```
+
+```shell
+useradd -g <group> <user>
+```
+
+**groupdel** 删除用户组
+

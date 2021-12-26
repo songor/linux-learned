@@ -343,7 +343,7 @@ vim a.txt b.txt :next 下一个文件 :prev 上一个文件
 
 **ctrl + v** 块可视模式
 
-I 块插入
+I 块插入 + 两次 esc
 
 d 块删除
 
@@ -416,4 +416,22 @@ useradd -g <group> <user>
 ```
 
 **groupdel** 删除用户组
+
+### 21 | su 和 sudo 命令的区别和使用方法
+
+**su** 切换用户
+
+**sudo** 以其他用户身份执行命令
+
+```shell
+visudo
+:!which shutdown
+<user> ALL=/usr/sbin/shutdown -c
+```
+
+```shell
+sudo /usr/sbin/shutdown -c
+```
+
+**visudo** /etc/sudoers
 

@@ -627,3 +627,40 @@ ip route add 10.0.0.0/24 via 192.168.0.1 (route add -net 10.0.0.0 netmask 255.25
 
 ip 使用的网络栈 ifconfig 不支持，所以通过 ip 命令给一个网卡绑定多个 ip，ifconfig 是查看不到的。
 
+### 29 | 网络故障排除命令
+
+ping / traceroute / mtr
+
+```shell
+ping www.baidu.com
+traceroute www.baidu.com
+mtr www.baidu.com
+```
+
+nslookup
+
+```shell
+nslookup www.baidu.com
+```
+
+telnet
+
+```shell
+telnet www.baidu.com 80
+```
+
+tcpdump
+
+```shell
+tcpdump -i eth0 port 80
+tcpdump -i eth0 host 10.0.0.1
+tcpdump -i eth0 -w /tmp/tcpdump.cap
+```
+
+netstat / ss
+
+```shell
+netstat -ntpl
+ss -ntpl
+```
+

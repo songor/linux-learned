@@ -730,3 +730,30 @@ Debian、Ubuntu 使用 apt 包管理器，软件安装包格式为 deb
 
 Windows scoop / macOS Homebrew
 
+### 32 | 使用 rpm 命令安装软件包
+
+vim-common-7.4.10-5.el7.x86_64.rpm
+
+vim-common 软件名称
+
+7.4.10-5 软件版本，5 表示此 rpm 包是第几次生成的
+
+el7 系统版本
+
+x86_64 平台
+
+**rpm**
+
+mount /dev/sr0 /mnt 挂载
+
+umount /mnt 或者 umount /dev/sr0 卸载
+
+```shell
+rpm -qa | more
+rpm -qa | grep vim
+rpm -q vim-common
+rpm -e vim-common
+rpm -i vim-common-7.4.10-5.el7.x86_64.rpm
+rpm -ql vim-common
+```
+

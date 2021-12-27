@@ -579,6 +579,8 @@ eno1 板载网卡 / ens33 PCI-E 网卡 / enp0s3 无法获取物理信息的 PCI-
 
 重启 # reboot
 
+修改文件名为 /etc/sysconfig/network-scripts/ifcfg-eth0
+
 ### 27 | 查看网络配置
 
 ifconfig eth0
@@ -662,5 +664,61 @@ netstat / ss
 ```shell
 netstat -ntpl
 ss -ntpl
+```
+
+### 30 | 网络管理和配置文件
+
+**SysV & systemd**
+
+建议只使用 1 个：CentOS 6 -> SysV CentOS 7 -> systemd
+
+service network status | start | stop | restart
+
+chkconfig --list network
+
+```shell
+chkconfig --list network
+network         0:off   1:off   2:on    3:on    4:on    5:on    6:off
+# 关闭 SysV
+chkconfig --level 2345 network off
+```
+
+systemctl list-unit-files NetworkManager.service
+
+systemctl start | stop | restart NetworkManager.service
+
+systemctl enable | disable NetworkManager.service
+
+**ifcfg-eth0 & /etc/rc.local & /etc/hosts**
+
+/etc/sysconfig/network-scripts/ifcfg-eth0
+
+```shell
+# 动态 IP
+DEVICE=eth0
+BOOTPROTO=dhcp
+ONBOOT=yes
+# 静态 IP
+BOOTPROTO=none
+IPADDR=10.211.55.3
+NETMASK=255.255.255.0
+GATEWAY=10.211.55.1
+DNS1=114.114.114.114
+DNS2=
+DNS3=
+```
+
+/etc/hosts
+
+```shell
+hostname
+# 修改 hostname
+hostname <hostname>
+hostnamectl set-hostname <hostname>
+
+vim /etc/hosts
+127.0.0.1 <hostname>
+
+reboot
 ```
 

@@ -794,15 +794,58 @@ yum update
 ### 34 | 通过源代码编译安装软件包
 
 ```shell
+yum install pcre-devel -y
+yum install openssl-devel -y
 wget https://openresty.org/download/openresty-1.15.8.1.tar.gz
 tar -zxf openresty-1.15.8.1.tar.gz
 cd openresty-1.15.8.1
 ./configure --prefix=/usr/local/openresty
-yum install pcre-devel -y
-yum install openssl-devel -y
 gmake -j2
 gmake install
 # make -j2
 # make install
+```
+
+### 35 | 如何进行内核升级
+
+**rpm**
+
+```shell
+# 查看内核版本
+uname -r
+# epel 库
+yum install epel-release -y
+# 最新版本内核
+yum install kernel
+# 指定版本内核
+yum install kernel 3.10.0
+# 更新内核 & 软件
+yum update
+```
+
+**源代码编译**
+
+```shell
+# 依赖包
+yum install gcc gcc-c++ make ncurses-devel openssl-devel elfutils-libelf-devel flex bison -y
+# 下载 & 解压缩
+# https://www.kernel.org/
+# https://mirrors.aliyun.com/linux-kernel/
+wget https://mirrors.aliyun.com/linux-kernel/v5.x/linux-5.1.14.tar.xz
+tar -xvf linux-5.1.14.tar.xz -C /usr/src/kernels
+# 配置内核编译参数
+cd /usr/src/kernels/linux-5.1.14
+make menuconfig | allyesconfig | allnoconfig
+vim .config
+# 使用当前系统内核配置
+cp /boot/config-3.10.0-957.21.3.el7.x86_64 /usr/src/kernels/linux-5.1.14/.config
+# 查看 cpu
+lscpu
+# 编译
+make -j2 all
+# 安装内核
+make modules_install
+make install
+reboot
 ```
 

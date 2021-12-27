@@ -849,3 +849,41 @@ make install
 reboot
 ```
 
+### 36 | grub 配置文件介绍
+
+/etc/default/grub & /etc/grub.d/
+
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+```shell
+# 修改默认引导内核
+grub2-editenv list
+grep ^menu /boot/grub2/grub.cfg
+grub2-set-default 0
+reboot
+```
+
+```shell
+# DEBUG 内核启动
+vim /etc/default/grub
+在 GRUB_CMDLINE_LINUX 删除 rhgb quiet
+```
+
+```shell
+# 重置 root 密码
+press 'e' to edit the selected item
+linux16 ... rd.break
+ctrl + x
+# 重新挂载 /sysroot
+mount -o remount,rw /sysroot
+# 根目录
+chroot /sysroot
+echo 123 | passwd --stdin root
+# 关闭 SELinux
+vim /etc/selinux/config
+SELINUX=disabled
+# 退回到虚拟根目录
+exit
+reboot
+```
+

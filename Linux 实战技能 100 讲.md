@@ -790,3 +790,19 @@ yum update
 保存 yum 安装过程中下载的包：修改 /etc/yum.conf 配置文件，将 keepcache=0 改为 keepcache=1。
 
 \ 被称作续行符，也就是原本在同一行中的命令，为了美观写为了多行。
+
+### 34 | 通过源代码编译安装软件包
+
+```shell
+wget https://openresty.org/download/openresty-1.15.8.1.tar.gz
+tar -zxf openresty-1.15.8.1.tar.gz
+cd openresty-1.15.8.1
+./configure --prefix=/usr/local/openresty
+yum install pcre-devel -y
+yum install openssl-devel -y
+gmake -j2
+gmake install
+# make -j2
+# make install
+```
+

@@ -573,9 +573,19 @@ eno1 板载网卡 / ens33 PCI-E 网卡 / enp0s3 无法获取物理信息的 PCI-
 
 **网络接口命名修改**
 
-编辑 /etc/default/grub 文件，增加 biosdevname=0 net.ifnames=0
+编辑 /etc/default/grub 文件，增加 biosdevname=0 net.ifnames=0 到 GRUB_CMDLINE_LINUX
 
 更新 grub # grub2-mkconfig -o /boot/grub2/grub.cfg
 
 重启 # reboot
+
+### 27 | 查看网络配置
+
+ifconfig eth0
+
+inet 172.23.211.126 / netmask 255.255.240.0 / ether 00:16:3e:0a:79:e4 / RX / TX
+
+查看网卡物理连接 mii-tool eth0
+
+查看网关 route -n，使用 -n 参数不解析主机名
 

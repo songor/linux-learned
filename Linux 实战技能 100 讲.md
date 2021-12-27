@@ -753,7 +753,40 @@ rpm -qa | more
 rpm -qa | grep vim
 rpm -q vim-common
 rpm -e vim-common
+# 考虑依赖关系
 rpm -i vim-common-7.4.10-5.el7.x86_64.rpm
 rpm -ql vim-common
 ```
 
+### 33 | 使用 yum 包管理器安装软件包
+
+**CentOS yum 源**
+
+http://mirror.centos.org/centos/7/
+
+https://mirrors.aliyun.com/centos/7/
+
+**yum 配置文件**
+
+修改 repo：/etc/yum.repos.d/CentOS-Base.repo
+
+替换 repo：wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+
+```shell
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+wget -O /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
+yum makecache
+```
+
+**yum 命令**
+
+install / remove / list / update
+
+```shell
+yum remove vim*
+yum update
+```
+
+保存 yum 安装过程中下载的包：修改 /etc/yum.conf 配置文件，将 keepcache=0 改为 keepcache=1。
+
+\ 被称作续行符，也就是原本在同一行中的命令，为了美观写为了多行。

@@ -549,3 +549,33 @@ drwxrwxrwt. 8 root root 4096 Dec 26 12:47 /tmp
 chmod 1777 -> drwxrwxrwt
 ```
 
+### 26 | 网络管理
+
+**网络状态查看工具**
+
+net-tools
+
+ifconfig / route / netstat
+
+iproute2
+
+ip / ss
+
+**网络状态查看命令**
+
+**ifconfig**
+
+eth0 第一块网卡（网络接口）
+
+CentOS 7 使用了一致性网络设备命名，以下都不匹配则使用 eth0
+
+eno1 板载网卡 / ens33 PCI-E 网卡 / enp0s3 无法获取物理信息的 PCI-E 网卡
+
+**网络接口命名修改**
+
+编辑 /etc/default/grub 文件，增加 biosdevname=0 net.ifnames=0
+
+更新 grub # grub2-mkconfig -o /boot/grub2/grub.cfg
+
+重启 # reboot
+

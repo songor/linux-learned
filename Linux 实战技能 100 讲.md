@@ -722,3 +722,11 @@ vim /etc/hosts
 reboot
 ```
 
+### 31 | 软件包管理器的使用
+
+CentOS、RedHat 使用 yum 包管理器，软件安装包格式为 rpm
+
+Debian、Ubuntu 使用 apt 包管理器，软件安装包格式为 deb
+
+Windows scoop / macOS Homebrew
+

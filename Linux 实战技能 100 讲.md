@@ -589,3 +589,41 @@ inet 172.23.211.126 / netmask 255.255.240.0 / ether 00:16:3e:0a:79:e4 / RX / TX
 
 查看网关 route -n，使用 -n 参数不解析主机名
 
+### 28 | 修改网络配置
+
+**ifconfig**
+
+ifconfig \<接口\> \<IP 地址\> [netmask 子网掩码]
+
+ifup \<接口\>
+
+ifdown \<接口\>
+
+**route**
+
+```shell
+route  [-v] [-A family |-4|-6] add [-net|-host] target [netmask Nm] [gw Gw] [metric N] [mss M] [window W] [irtt I] [reject] [mod] [dyn] [reinstate] [[dev] If]
+```
+
+route add default gw \<网关 IP\>
+
+route add -host \<指定 IP\> gw \<网关 IP\>
+
+route add -net \<指定网段> netmask \<子网掩码> gw \<网关 IP\>
+
+```shell
+route  [-v] [-A family |-4|-6] del [-net|-host] target [gw Gw] [netmask Nm] [metric N] [[dev] If]
+```
+
+**ip**
+
+ip addr (ifconfig)
+
+ip link set dev eth0 up (ifup eth0)
+
+ip addr add 10.0.0.1/24 dev eth0 (ifconfig eth0 10.0.0.1 netmask 255.255.255.0)
+
+ip route add 10.0.0.0/24 via 192.168.0.1 (route add -net 10.0.0.0 netmask 255.255.255.0 gw 192.168.0.1)
+
+ip 使用的网络栈 ifconfig 不支持，所以通过 ip 命令给一个网卡绑定多个 ip，ifconfig 是查看不到的。
+

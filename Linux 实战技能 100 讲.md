@@ -924,5 +924,46 @@ KiB Swap:        0 total,        0 free,        0 used.   347680 avail Mem
 # buff/cache 内核缓存
 PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
 # TIME+ 该进程启动后占用的总的 CPU 时间
+# NI nice
+```
+
+-p monitor only processes with specified process IDs
+
+### 38 | 进程的控制与进程之间的关系
+
+**调整优先级**
+
+nice 范围从 -20 到 19，值越小优先级越高，抢占的资源就越多
+
+renice 重新设置优先级
+
+```shell
+# nice 默认为 0
+nice -n 10 ./x.sh
+24370
+renice -n 15 24370
+```
+
+**进程的作业控制**
+
+jobs / & 符号
+
+```shell
+# 后台运行
+./x.sh &
+24667
+# display status of jobs
+jobs
+[1]+  Running                 ./a.sh &
+# move job to the foreground
+fg 1
+# ctrl + z 挂起暂停
+[1]+  Stopped                 ./a.sh
+# 恢复运行
+jobs
+# 前台运行
+# fg 1
+# 后台运行
+bg 1
 ```
 

@@ -687,7 +687,7 @@ systemctl list-unit-files NetworkManager.service
 
 systemctl start | stop | restart NetworkManager.service
 
-systemctl enable | disable NetworkManager.service
+systemctl enable | disable NetworkManager.service 随着开机启动 / 不启动
 
 **ifcfg-eth0 & /etc/rc.local & /etc/hosts**
 
@@ -1061,4 +1061,50 @@ ctrl + c & exit 退出
 /var/log/secure
 
 /var/log/cron
+
+### 42 | 服务管理工具 systemctl
+
+服务（提供常见功能的守护进程）集中管理工具
+
+**service**
+
+/etc/init.d/
+
+```shell
+# init N (0 - 6) 控制不同的级别启动不同的服务
+chkconfig --list
+netconsole      0:off   1:off   2:off   3:off   4:off   5:off   6:off
+network         0:off   1:off   2:on    3:on    4:on    5:on    6:off
+```
+
+**systemctl**
+
+/usr/lib/systemd/system/
+
+```shell
+# 级别
+ls -l runlevel*.target
+lrwxrwxrwx 1 root root 15 Jul 11  2019 runlevel0.target -> poweroff.target
+lrwxrwxrwx 1 root root 13 Jul 11  2019 runlevel1.target -> rescue.target
+lrwxrwxrwx 1 root root 17 Jul 11  2019 runlevel2.target -> multi-user.target
+lrwxrwxrwx 1 root root 17 Jul 11  2019 runlevel3.target -> multi-user.target
+lrwxrwxrwx 1 root root 17 Jul 11  2019 runlevel4.target -> multi-user.target
+lrwxrwxrwx 1 root root 16 Jul 11  2019 runlevel5.target -> graphical.target
+lrwxrwxrwx 1 root root 13 Jul 11  2019 runlevel6.target -> reboot.target
+# 当前级别
+systemctl get-default
+# 重置级别
+systemctl set-default multi-user.target
+```
+
+```shell
+vim sshd.service
+
+[Unit]
+...
+After=network.target sshd-keygen.service
+...
+[Install]
+WantedBy=multi-user.target
+```
 

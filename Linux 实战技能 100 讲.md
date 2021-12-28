@@ -1143,3 +1143,46 @@ free -g
 杀进程是根据 /proc/\<进程 id\>/oom_score 和 oom_adj 文件来确定的。
 
 出现 oom kill 的时机是 malloc() 无法获得资源的时候，选择 kill 进程时会选择内存占用高、存活时间短的进程，即多释放内存，少杀无辜进程。
+
+### 46 | 磁盘分区和文件大小查看
+
+fdisk / df / du
+
+```shell
+# parted -l
+fdisk -l
+Disk /dev/vda: 21.5 GB, 21474836480 bytes, 41943040 sectors
+...
+Partition Table: msdos
+...
+   Device Boot      Start         End      Blocks   Id  System
+/dev/vda1   *        2048    41943039    20970496   83  Linux
+
+ls -l /dev/vd*
+brw-rw---- 1 root disk 253, 0 Dec 25 16:06 /dev/vda
+brw-rw---- 1 root disk 253, 1 Dec 25 16:06 /dev/vda1
+
+df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vda1        20G  4.8G   14G  26% /
+
+# dd convert and copy a file
+dd if=/dev/zero bs=4M count=10 of=afile
+# 空洞文件（kvm xen 虚拟化工具）
+dd if=/dev/zero bs=4M count=10 seek=20 of=bfile
+# ls
+ls -lh bfile
+-rw-r--r-- 1 root root 120M Dec 28 19:09 bfile
+# 实际占用空间
+du -h bfile
+40M     bfile
+```
+
+**msdos**
+
+在早期的 Windows 引导启动过程中，负责引导和启动的数据放在磁盘的第一个扇区中，众做周知第一个扇区大小是 512 字节，前 446 字节用于主引导记录（MBR），64 字节用于分区表，后面的 55 AA 放在最后做校验位。Linux 为了兼容 Windows 使用了这种分区记录方式，即：msdos 分区表。
+
+msdos 方式分区表空间有限，既要保证分区数量充足，又要记录分区使用空间，就导致硬盘如果大于 2T 无法记录的问题（gpt / LBA），因此要使用一种新的方法来引导，即 UEFI + GPT 方式。
+
+UEFI 方式引导要修改 BIOS，GPT 方式要在 parted 命令使用 mklabel gpt 进行更改。
+

@@ -1108,3 +1108,18 @@ After=network.target sshd-keygen.service
 WantedBy=multi-user.target
 ```
 
+### 43 | SELinux 简介
+
+MAC（强制访问控制）与 DAC（自主访问控制）
+
+```shell
+# 查看 SELinux 状态
+getenforce
+# enforcing / permissive / disabled
+vim /etc/selinux/config
+# LABEL
+ps -Z
+id -Z
+ls -Z
+```
+

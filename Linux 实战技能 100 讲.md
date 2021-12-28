@@ -1196,3 +1196,9 @@ ext4 / xfs / NTFS（需安装额外软件）
 
 超级块 / 超级块副本 / inode / 数据块（datablock）
 
+df 读取 超级块
+
+inode 记录文件编号（ls -i）、大小、权限 etc. / 文件名记录在父目录 inode 中 => 所以，文件的 r 权限和目录的 r 权限不同
+
+ls 读取 inode 中文件大小信息，du 统计 datablock 个数
+

@@ -1202,3 +1202,48 @@ inode 记录文件编号（ls -i）、大小、权限 etc. / 文件名记录在�
 
 ls 读取 inode 中文件大小信息，du 统计 datablock 个数
 
+### 48 | inode 和数据块操作
+
+```shell
+# 默认数据块 4K
+touch xfile
+echo xxx > xfile
+ls -li xfile
+931094 -rw-r--r-- 1 root root 4 Dec 28 23:20 xfile
+du -h xfile
+4.0K    xfile
+# cp 创建了不同的文件
+cp xfile xxfile
+931094 -rw-r--r-- 1 root root 4 Dec 28 23:20 xfile
+931095 -rw-r--r-- 1 root root 4 Dec 28 23:26 xxfile
+# mv 仅修改父目录记录的文件名
+# 移动速度的快慢取决于是否跨分区
+mv xxfile xxxfile
+931095 -rw-r--r-- 1 root root 4 Dec 28 23:26 xxxfile
+# vim 修改 inode 和 datablock (.swp)
+# echo 仅修改 datablock
+# rm 断开文件名和 inode 链接
+# 硬链接 不能跨文件系统
+ls -li xfile
+931094 -rw-r--r-- 1 root root 4 Dec 28 23:20 xfile
+ln xfile yfile
+# 2 表示硬链接个数
+931094 -rw-r--r-- 2 root root 4 Dec 28 23:20 xfile
+931094 -rw-r--r-- 2 root root 4 Dec 28 23:20 yfile
+# 软链接（符号链接）inode 不同，可跨不同的文件系统（分区）
+ln -s xfile zfile
+931089 lrwxrwxrwx 1 root root 5 Dec 28 23:46 zfile -> xfile
+# 对软链接 zfile 的修改，会传递到 xfile
+chmod 755 zfile
+931094 -rwxr-xr-x 2 root root 4 Dec 28 23:20 xfile
+```
+
+```shell
+# facl 文件访问控制列表
+getfacl xfile
+setfacl -m u:user1:w xfile
+setfacl -m g:group1:r xfile
+setfacl -x u:user1 xfile
+setfacl -x g:group1 xfile
+```
+

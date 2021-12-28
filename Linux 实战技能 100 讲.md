@@ -887,3 +887,42 @@ exit
 reboot
 ```
 
+### 37 | 使用 ps 和 top 命令查看进程
+
+运行中的程序，从程序开始运行到终止的整个生命周期是可管理的。
+
+正常终止 / 异常终止
+
+**ps**
+
+```shell
+# to see every process on the system
+ps -e
+ps -ef
+# to get info about threads
+ps -eLf
+ID        PID  PPID   LWP  C NLWP STIME TTY          TIME CMD
+# LWP 该进程拥有的线程数
+# TTY 终端
+```
+
+终端，泛指一切能控制计算机的输入接口，包括串口线的硬件终端，也包括类似 Windows 的图形界面，默认运行 Linux 服务器的字符界面。而在 Linux 字符界面上，软件终端又分成标准终端设备 tty1-tty6 和虚拟终端 pts 。我们使用 ssh 连接的终端，和在图形界面打开的终端都属于虚拟终端，它们和 tty 设备的区别就是没有设备编号，所以叫做“虚拟”终端。
+
+**pstree**
+
+**top**
+
+```shell
+%Cpu0  :  1.7 us,  1.7 sy,  0.0 ni, 96.6 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+# us 用户态进程占用 CPU 时间百分比
+# sy 内核占用 CPU 时间百分比
+# id 空闲 CPU 时间百分比
+# wa 等待 I/O 的 CPU 时间百分比
+# 按键盘数字 "1"，可监控每个逻辑 CPU 的状况
+KiB Mem :   498640 total,    26380 free,   123964 used,   348296 buff/cache
+KiB Swap:        0 total,        0 free,        0 used.   347680 avail Mem
+# buff/cache 内核缓存
+PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
+# TIME+ 该进程启动后占用的总的 CPU 时间
+```
+

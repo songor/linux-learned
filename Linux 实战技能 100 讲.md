@@ -1038,3 +1038,27 @@ lrwx------ 1 root root 64 Dec 25 20:39 2 -> socket:[16554]
 lrwx------ 1 root root 64 Dec 25 20:39 3 -> socket:[16561]
 ```
 
+### 41 | screen 命令和系统日志
+
+**screen**
+
+screen 进入 screen 环境
+
+ctrl + a & d 退出（detached）screen 环境
+
+screen -ls 查看 screen 会话
+
+screen -r sessionid 恢复会话
+
+ctrl + c & exit 退出
+
+**系统日志**
+
+/var/log/messages
+
+/var/log/dmesg
+
+/var/log/secure
+
+/var/log/cron
+

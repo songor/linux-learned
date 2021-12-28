@@ -996,3 +996,45 @@ ctrl + c 表示 2) SIGINT
 
 kill -9 \<PID\> 立即结束程序
 
+### 40 | 守护进程
+
+使用 nohup 与 & 符号配合
+
+```shell
+# nohup 命令使进程忽略 hangup（挂起）信号
+# 关闭终端进程仍然运行
+nohup tail -f /var/log/messages &
+# 关闭终端后进程的父进程是 1
+ps -ef | grep tail
+root      1744     1  0 15:24 ?        00:00:00 tail -f /var/log/messages
+# 位于内存中的伪文件系统，该目录下保存的不是真正的文件和目录，而是一些“运行时”信息
+cd /proc/1744
+# 进程的运行目录
+ls -l cwd
+lrwxrwxrwx 1 root root 0 Dec 28 15:24 cwd -> /root
+# 进程打开的每一个文件的文件描述符
+ls -l fd
+total 0
+l-wx------ 1 root root 64 Dec 28 15:25 0 -> /dev/null
+l-wx------ 1 root root 64 Dec 28 15:25 1 -> /root/nohup.out
+l-wx------ 1 root root 64 Dec 28 15:25 2 -> /root/nohup.out
+lr-x------ 1 root root 64 Dec 28 15:25 3 -> /var/log/messages
+lr-x------ 1 root root 64 Dec 28 15:25 4 -> anon_inode:inotify
+```
+
+daemon 进程，无终端启动、运行进程
+
+```shell
+ps -ef | grep sshd
+root      1071     1  0 Dec25 ?        00:00:00 /usr/sbin/sshd -D
+cd /proc/1071
+ls -l cwd
+lrwxrwxrwx 1 root root 0 Dec 28 03:52 cwd -> /
+ls -l fd
+total 0
+lr-x------ 1 root root 64 Dec 25 20:39 0 -> /dev/null
+lrwx------ 1 root root 64 Dec 25 20:39 1 -> socket:[16554]
+lrwx------ 1 root root 64 Dec 25 20:39 2 -> socket:[16554]
+lrwx------ 1 root root 64 Dec 25 20:39 3 -> socket:[16561]
+```
+

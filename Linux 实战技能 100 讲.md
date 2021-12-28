@@ -1186,3 +1186,13 @@ msdos 方式分区表空间有限，既要保证分区数量充足，又要记�
 
 UEFI 方式引导要修改 BIOS，GPT 方式要在 parted 命令使用 mklabel gpt 进行更改。
 
+### 47 | 文件系统管理
+
+**常见文件系统**
+
+ext4 / xfs / NTFS（需安装额外软件）
+
+**ext4**
+
+超级块 / 超级块副本 / inode / 数据块（datablock）
+

@@ -929,6 +929,8 @@ PID USER      PR  NI    VIRT    RES    SHR S %CPU %MEM     TIME+ COMMAND
 
 -p monitor only processes with specified process IDs
 
+"E" 切换 KB / MB / GB
+
 ### 38 | 进程的控制与进程之间的关系
 
 **调整优先级**
@@ -1125,3 +1127,19 @@ ls -Z
 
 ### 44 | 内存与磁盘管理
 
+### 45 | 内存查看命令
+
+free / top
+
+```shell
+free -m
+free -g
+```
+
+> Basically, “buff/cache” counts memory used for data that’s on disk or should end up there soon, and as a result is potentially usable (the corresponding memory can be made available immediately, if it hasn’t been modified since it was read, or given enough time, if it has); “available” measures the amount of memory which can be allocated and used without causing more swapping.
+
+> Swap is **a space on a disk that is used when the amount of physical RAM memory is full**. When a Linux system runs out of RAM, inactive pages are moved from the RAM to the swap space.
+
+杀进程是根据 /proc/\<进程 id\>/oom_score 和 oom_adj 文件来确定的。
+
+出现 oom kill 的时机是 malloc() 无法获得资源的时候，选择 kill 进程时会选择内存占用高、存活时间短的进程，即多释放内存，少杀无辜进程。

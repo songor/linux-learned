@@ -1503,3 +1503,48 @@ source ./filename.sh 不产生子进程
 >
 > 在管道符两端放置内部命令，相当于打开了新的子 shell。内部命令执行结束之后，子 shell 也会跟着一起结束。
 
+cat | ps -f => cat 子进程阻塞
+
+### 60 | 重定向
+
+"<" 输入重定向符号
+
+">" ">>" "2>" "&>" 输出重定向符号
+
+```shell
+wc -l < /etc/passwd
+echo xxx > x.txt	
+```
+
+[How does "cat << EOF" work in bash?](https://stackoverflow.com/questions/2500436/how-does-cat-eof-work-in-bash)
+
+**Assign multi-line string to a shell variable**
+
+```shell
+sql=$(cat <<EOF
+SELECT foo, bar FROM db
+WHERE foo='baz'
+EOF
+)
+```
+
+**Pass multi-line string to a file in Bash**
+
+```shell
+cat <<EOF > /root/print.sh
+#!/bin/bash
+echo \$PWD
+echo $PWD
+EOF
+```
+
+**Pass multi-line string to a pipe in Bash**
+
+```shell
+cat <<EOF | grep 'b' | tee /root/b.txt
+foo
+bar
+baz
+EOF
+```
+

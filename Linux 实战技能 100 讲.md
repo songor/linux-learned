@@ -1303,3 +1303,39 @@ touch 11
 touch: cannot touch ‘11’: Disk quota exceeded
 ```
 
+### 51 | 交换分区 swap 的查看与创建
+
+**mkswap & swapon**
+
+```shell
+free -m
+              total        used        free      shared  buff/cache   available
+Mem:            486         123         114           0         248         336
+Swap:             0           0           0
+# 分区
+fdisk /dev/vdb
+# 格式化
+mkswap /dev/vdb1
+# 开启
+swapon /dev/vdb1
+# /etc/fstab
+/dev/vdb1 swap swap defaults 0 0
+free -m
+              total        used        free      shared  buff/cache   available
+Mem:            486         139          98           0         249         321
+Swap:         20478           0       20478
+# 关闭
+swapoff /dev/vdb1
+```
+
+**使用文件制作交换分区**
+
+```shell
+dd if=/dev/zero bs=4M count=1024 of=/swapfile
+mkswap /swapfile
+chmod 600 /swapfile
+swapon /swapfile
+# /etc/fstab
+/swapfile swap swap defaults 0 0
+```
+

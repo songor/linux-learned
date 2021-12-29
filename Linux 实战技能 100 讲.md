@@ -1247,3 +1247,38 @@ setfacl -x u:user1 xfile
 setfacl -x g:group1 xfile
 ```
 
+### 49 | 分区和挂载
+
+```shell
+# 分区
+fdisk /dev/vdb
+# n add a new partition
+# p print the partition table
+# w write table to disk and exit
+Disk /dev/vdb: 21.5 GB, 21474836480 bytes, 41943040 sectors
+...
+   Device Boot      Start         End      Blocks   Id  System
+/dev/vdb1            2048    41943039    20970496   83  Linux
+# 格式化
+# mkfs.btrfs   mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.ext4    mkfs.minix   mkfs.xfs
+mkfs.ext4 /dev/vdb1
+```
+
+```shell
+# 挂载
+mkdir /mnt/vdb1
+mount /dev/vdb1 /mnt/vdb1
+
+mount
+/dev/vda1 on / type ext4 (rw,relatime,data=ordered)
+/dev/vdb1 on /mnt/vdb1 type ext4 (rw,relatime,data=ordered)
+
+df -h
+/dev/vda1        20G  4.9G   14G  26% /
+/dev/vdb1        20G   45M   19G   1% /mnt/vdb1
+
+# /etc/fstab
+vim /etc/fstab
+/dev/vdb1 /mnt/vdb1 ext4 defaults 0 0
+```
+

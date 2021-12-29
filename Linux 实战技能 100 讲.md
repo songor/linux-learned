@@ -1339,3 +1339,30 @@ swapon /swapfile
 /swapfile swap swap defaults 0 0
 ```
 
+### 52 | 软件 RAID 的使用
+
+RAID 0 / RAID 1 / RAID 5 / RAID 10
+
+**RAID 卡**
+
+**软件 RAID**
+
+```shell
+# /dev/vdb1 & /dev/vdc1
+yum install mdadm -y
+# RAID 1
+mdadm -C /dev/md0 -a yes -l1 -n2 /dev/vd[b,c]1
+# 查看
+mdadm -D /dev/md0
+# /etc/mdadm.conf
+echo DEVICE /dev/vd[b,c]1 >> /etc/mdadm.conf
+mdadm -Evs >> /etc/mdadm.conf
+# 格式化
+mkfs.xfs /dev/md0
+# 挂载
+mkdir /mnt/md0
+mount /dev/md0 /mnt/md0
+# 破坏磁盘
+dd if=/dev/zero of=/dev/vdc bs=4M count=1
+```
+

@@ -1282,3 +1282,24 @@ vim /etc/fstab
 /dev/vdb1 /mnt/vdb1 ext4 defaults 0 0
 ```
 
+### 50 | 分区和挂载磁盘配额
+
+```shell
+umount /dev/vdb1
+fdisk /dev/vdb
+# d & n
+mkfs.xfs -f /dev/vdb1
+mkdir -p /mnt/vdb1
+mount -o uquota,gquota /dev/vdb1 /mnt/vdb1
+chmod 1777 /mnt/vdb1
+# 查看
+xfs_quota -x -c 'report -ugibh' /mnt/vdb1
+# 设置
+xfs_quota -x -c 'limit -u isoft=5 ihard=10 user1' /mnt/vdb1
+# 测试
+su - user1
+touch 1 2 3 4 5 6 7 8 9 10
+touch 11
+touch: cannot touch ‘11’: Disk quota exceeded
+```
+

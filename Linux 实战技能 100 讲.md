@@ -1259,7 +1259,7 @@ Disk /dev/vdb: 21.5 GB, 21474836480 bytes, 41943040 sectors
 ...
    Device Boot      Start         End      Blocks   Id  System
 /dev/vdb1            2048    41943039    20970496   83  Linux
-# 格式化
+# 格式化（文件系统）
 # mkfs.btrfs   mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.ext4    mkfs.minix   mkfs.xfs
 mkfs.ext4 /dev/vdb1
 ```
@@ -1348,7 +1348,7 @@ RAID 0 / RAID 1 / RAID 5 / RAID 10
 **软件 RAID**
 
 ```shell
-# /dev/vdb1 & /dev/vdc1
+# 分区 /dev/vdb1 & /dev/vdc1
 yum install mdadm -y
 # RAID 1
 mdadm -C /dev/md0 -a yes -l1 -n2 /dev/vd[b,c]1
@@ -1357,12 +1357,49 @@ mdadm -D /dev/md0
 # /etc/mdadm.conf
 echo DEVICE /dev/vd[b,c]1 >> /etc/mdadm.conf
 mdadm -Evs >> /etc/mdadm.conf
-# 格式化
+# 格式化（文件系统）
 mkfs.xfs /dev/md0
 # 挂载
 mkdir /mnt/md0
 mount /dev/md0 /mnt/md0
 # 破坏磁盘
 dd if=/dev/zero of=/dev/vdc bs=4M count=1
+# 禁用 RAID
+umount /dev/md0
+mdadm --stop /dev/md0
+```
+
+### 53 | 逻辑卷 LVM 的用途与创建
+
+```shell
+# 破坏 RAID 超级块
+dd if=/dev/zero of=/dev/vdb1 bs=1M count=1
+dd if=/dev/zero of=/dev/vdc1 bs=1M count=1
+# 分区 /dev/vdb1 /dev/vdc1
+# PV / VG / LV 实现了动态扩展，xfs 实现了以文件方式进行操作
+# xfs 既可以在分区上，也可以在 LV 上
+# 物理卷（PV Physical Volume）
+yum reinstall lvm2
+pvcreate /dev/vd[b,c]1
+pvs
+# 卷组（VG Volume Group）
+vgcreate vg1 /dev/vdb1
+vgs
+# 逻辑卷（LV Logical Volume）
+lvcreate -L 100M -n lv1 vg1
+lvs
+# 格式化（文件系统）
+mkfs.xfs /dev/vg1/lv1
+# 挂载
+mkdir /mnt/lv1
+mount /dev/vg1/lv1 /mnt/lv1
+```
+
+```shell
+# 扩展
+vgextend vg1 /dev/vdc1
+lvextend -L +10G /dev/vg1/lv1
+xfs_growfs /dev/vg1/lv1
+df -h
 ```
 

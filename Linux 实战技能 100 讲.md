@@ -1,5 +1,7 @@
 # Linux 实战技能 100 讲
 
+## 第一章 基础篇
+
 ### 01 | 课程介绍
 
 ### 02 | 内容综述
@@ -41,6 +43,8 @@ RedHat Enterprise Linux / Fedora / CentOS / Debian / Ubuntu
 /usr/bin & /usr/sbin 系统预装的其他命令
 
 /usr/bin 放用户需要执行的命令；/usr/sbin 放系统运行不必须的命令。
+
+## 第二章 系统操作篇
 
 ### 08 | 万能的帮助命令：man、help、info
 
@@ -548,6 +552,8 @@ drwxrwxrwt. 8 root root 4096 Dec 26 12:47 /tmp
 
 chmod 1777 -> drwxrwxrwt
 ```
+
+## 第三章 系统管理篇
 
 ### 26 | 网络管理
 
@@ -1412,4 +1418,20 @@ df -h
 yum install iftop -y
 
 iftop -P
+
+## 第四章 Shell 篇
+
+### 55 | 什么是 Shell
+
+Shell 是命令解释器，用于解释用户对操作系统的操作。
+
+```shell
+cat /etc/shells
+/bin/sh
+/bin/bash
+/usr/bin/sh
+/usr/bin/bash
+```
+
+CentOS 7 默认使用的 Shell 是 bash。
 

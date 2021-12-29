@@ -1403,3 +1403,13 @@ xfs_growfs /dev/vg1/lv1
 df -h
 ```
 
+### 54 | 系统综合状态查看命令 sar 以及第三方命令
+
+**sar**
+
+**iftop**
+
+yum install iftop -y
+
+iftop -P
+

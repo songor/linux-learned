@@ -1467,3 +1467,13 @@ ls -l /etc/rc.d/
 
 ls -l /etc/systemd/system/ & ls -l /usr/lib/systemd/system/
 
+### 57 | Shell 脚本的格式
+
+Unix 的哲学：一条命令只做一件事
+
+为了组合命令和多次执行，使用脚本文件来保存需要执行的命令
+
+赋予该文件执行权限（chmod u+rx filename）
+
+Sha-Bang #!/bin/bash
+

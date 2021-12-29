@@ -1477,3 +1477,17 @@ Unix 的哲学：一条命令只做一件事
 
 Sha-Bang #!/bin/bash
 
+### 58 | 脚本不同执行方式的影响
+
+bash ./filename.sh bash 解释脚本，产生子进程
+
+./filename.sh Sha-Bang 解释脚本，产生子进程，必须有可执行权限
+
+source ./filename.sh 不产生子进程
+
+. ./filename.sh 不产生子进程
+
+**内建命令和外部命令**
+
+内建命令不会创建子进程；内建命令对当前 Shell 生效
+

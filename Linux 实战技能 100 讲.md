@@ -1435,3 +1435,35 @@ cat /etc/shells
 
 CentOS 7 默认使用的 Shell 是 bash。
 
+### 56 | Linux 的启动过程
+
+BIOS / MBR / BootLoader (grub) / kernel / systemd / 系统初始化 / shell
+
+**BIOS**
+
+选择引导介质
+
+**MBR**
+
+dd if=/dev/vda of=mbr.bin bs=446 count=1
+
+dd if=/dev/vda of=mbr.bin bs=512 count=1
+
+hexdump -C mbr.bin
+
+55 aa
+
+**grub**
+
+选择内核版本
+
+/boot/grub2/
+
+grub2-editenv list / uname -r
+
+**init & systemd**
+
+ls -l /etc/rc.d/
+
+ls -l /etc/systemd/system/ & ls -l /usr/lib/systemd/system/
+

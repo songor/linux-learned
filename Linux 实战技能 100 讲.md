@@ -1759,7 +1759,7 @@ x=$(ls -l)
 [ 5 -gt 4 ]
 # 0
 echo $?
-# 测试表达式
+# [] 扩展写法 [[]]，测试表达式
 [[ 5 > 4]]
 # 0
 echo $?
@@ -1823,4 +1823,23 @@ $ 取值符号
 & 后台运行
 
   空格 echo {0..9} / echo { 0..9 }
+
+### 69 | test 比较
+
+**exit** returns the status of last command that is executed
+
+exit 10
+
+$? 判断前一个进程是否正常退出
+
+**test** check file types and compare values
+
+```shell
+test -f /etc/passwd
+[ -d /etc/ ]
+[ -e /etc/ ]
+[ 5 -gt 4 ]
+[[ 5 > 4 ]]
+[ "abc" = "ABC" ]
+```
 

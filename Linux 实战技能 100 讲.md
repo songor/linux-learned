@@ -1655,3 +1655,29 @@ source x.sh
 . ./x.sh
 ```
 
+### 64 | 环境变量配置文件
+
+**执行顺序**
+
+/etc/profile
+
+/etc/profile.d/
+
+~/.bash_profile
+
+~/.bashrc
+
+/etc/bashrc 
+
+**区别**
+
+**/etc/** 全部用户；**~/** 特有用户
+
+Login Shell (su - username) & Non-Login Shell (su username)
+
+Non-Login Shell 仅执行 bashrc
+
+**即刻生效**
+
+**source** /etc/bashrc
+

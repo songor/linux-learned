@@ -1578,3 +1578,40 @@ lsetc=$(ls -l /etc)
 
 x='hello "bash"'
 
+### 62 | 变量引用及作用范围
+
+${变量名}
+
+${变量名} 在部分情况下可以省略为 $变量名
+
+echo ${变量名}other
+
+**作用范围**
+
+默认为当前 shell 进程
+
+```shell
+x=1
+# 子进程
+bash
+echo $x
+x=2
+# 父进程
+exit
+# 1
+echo $x
+```
+
+```shell
+# 子进程获取父进程的变量
+export x
+# 子进程
+bash
+# 1
+echo $x
+```
+
+export 变量名=变量值
+
+unset 变量名
+

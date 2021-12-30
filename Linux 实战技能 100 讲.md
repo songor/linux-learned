@@ -1615,3 +1615,43 @@ export 变量名=变量值
 
 unset 变量名
 
+### 63 | 环境变量、预定义变量与位置变量
+
+```shell
+# 环境变量 export
+env
+# 命令搜索路径
+echo $PATH
+PATH=$PATH:/root
+echo $PS1
+# 预定义变量 & 位置变量
+set
+# 上一条命令是否正确执行
+echo $?
+# 当前进程 PID
+echo $$
+# 当前进程名称
+echo $0
+# 位置参数
+$1
+# 变量替换，规避 $2 为空值，默认为 _
+${2-_}
+$(10)
+```
+
+```shell
+#!/bin/bash
+
+echo $$
+echo $0
+
+# x.sh
+bash x.sh
+# ./x.sh
+./x.sh
+# -bash
+source x.sh
+# -bash
+. ./x.sh
+```
+

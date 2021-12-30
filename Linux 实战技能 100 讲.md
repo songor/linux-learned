@@ -1875,3 +1875,19 @@ else
 fi
 ```
 
+### 72 | 嵌套 if 的使用
+
+```shell
+#!/bin/bash
+
+if [ $UID = 0 ] ; then
+  echo "have permission"
+  if [ -x /tmp/x.sh ] ; then
+    echo "start running"
+    /tmp/x.sh
+  fi
+else
+  echo "permission denied"
+fi
+```
+

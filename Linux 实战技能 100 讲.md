@@ -1850,3 +1850,28 @@ if [ $UID = 0 ] ; then echo "root user" ; fi
 if pwd ; then echo "pwd running" ; fi
 ```
 
+### 71 | if-else 判断的使用
+
+```shell
+#!/bin/bash
+
+if [ $USER = root ] ; then
+  echo "root user"
+else
+  echo "other user"
+  echo $UID
+fi
+```
+
+```shell
+#!/bin/bash
+
+if [ $USER = root ] ; then
+  echo "root user"
+elif [ $USER = admin ] ; then
+  echo "it's admin"
+else
+  echo "other user"
+fi
+```
+

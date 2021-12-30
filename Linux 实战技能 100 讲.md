@@ -1843,3 +1843,10 @@ test -f /etc/passwd
 [ "abc" = "ABC" ]
 ```
 
+### 70 | if 判断的使用
+
+```shell
+if [ $UID = 0 ] ; then echo "root user" ; fi
+if pwd ; then echo "pwd running" ; fi
+```
+

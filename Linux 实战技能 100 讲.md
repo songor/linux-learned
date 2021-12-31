@@ -2037,3 +2037,9 @@ checkpid() {
 # echo $?
 ```
 
+### 80 | 系统函数库介绍
+
+/etc/init.d/functions
+
+source /etc/init.d/functions
+

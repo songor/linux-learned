@@ -2113,6 +2113,8 @@ tail -f /var/log/cron
 
 **anacontab** 延时计划任务
 
+延时计划任务会查询计划任务，哪些任务在该执行的时间点没执行？需要在开机多久再补充执行一次？
+
 /etc/cron.d/0hourly
 
 /etc/anacrontab

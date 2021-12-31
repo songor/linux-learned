@@ -2074,3 +2074,18 @@ done
 ### kill -9 <PID>
 ```
 
+### 83 | 一次性计划任务
+
+**at** executes commands at a specified time
+
+```shell
+at 10:24
+# 命令执行路径
+# 无标准输入、输出
+at> echo $(date) > /tmp/date.txt
+# ctrl + d
+at> <EOT>
+```
+
+**atq** lists the user's pending jobs
+

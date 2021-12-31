@@ -1956,3 +1956,25 @@ done
 while :; do echo "loop"; done
 ```
 
+### 77 | 循环的嵌套和 break、continue 语句
+
+```shell
+for script in /etc/profile.d/*.sh; do if [ -x $script ]; then . $script; fi; done
+```
+
+```shell
+# 1 2 3 4
+for num in {1..9}; do
+	if [ $num -eq 5 ]; then break; fi
+	echo $num
+done
+```
+
+```shell
+# 1 2 3 4 6 7 8 9
+for num in {1..9}; do
+	if [ $num -eq 5 ]; then continue; fi
+	echo $num
+done
+```
+

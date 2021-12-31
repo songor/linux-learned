@@ -2043,3 +2043,34 @@ checkpid() {
 
 source /etc/init.d/functions
 
+### 81 | 脚本资源控制
+
+ulimit -a shell resource limits
+
+fork 炸弹 .(){.|.&}; .
+
+### 82 | 信号
+
+kill 默认发送 15 号信号
+
+ctrl + c 发送 2 号信号
+
+kill -9 9 号信号不可阻塞
+
+```shell
+#!/bin/bash
+
+trap "echo SIG 15" 15
+trap "echo SIG 2" 2
+
+echo $$
+
+while :; do
+	:
+done
+
+### kill -15 <PID>
+### ctrl + c
+### kill -9 <PID>
+```
+

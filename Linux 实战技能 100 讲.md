@@ -2109,3 +2109,15 @@ cat /var/spool/cron/\<username\>
 
 tail -f /var/log/cron
 
+### 85 | 为脚本加锁
+
+**anacontab** 延时计划任务
+
+/etc/cron.d/0hourly
+
+/etc/anacrontab
+
+**flock** 锁文件
+
+flock -xn "/tmp/f.lock" -c "/root/x.sh"
+

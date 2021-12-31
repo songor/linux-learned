@@ -2010,3 +2010,30 @@ while [ $# -ge 1 ]; do
 done
 ```
 
+### 79 | 自定义函数
+
+```shell
+function cdls() {
+	cd $1
+	ls -l
+}
+
+# cdls /tmp/
+```
+
+```shell
+#!/bin/bash
+
+checkpid() {
+	local pid
+	for pid in $*; do
+		[ -d "/proc/$pid" ] && return 0
+	done
+	return 1
+}
+
+# source checkpid.sh
+# checkpid 0
+# echo $?
+```
+

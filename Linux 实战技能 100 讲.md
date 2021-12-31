@@ -1929,3 +1929,9 @@ for file in $(ls *.mp3); do
 done
 ```
 
+### 75 | C 语言风格的 for
+
+```shell
+for ((i = 0; i <= 10; i++)); do echo $i; done
+```
+

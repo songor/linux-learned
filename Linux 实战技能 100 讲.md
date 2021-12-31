@@ -2123,3 +2123,27 @@ tail -f /var/log/cron
 
 flock -xn "/tmp/f.lock" -c "/root/x.sh"
 
+## 第五章 文本操作篇
+
+### 86 | 元字符介绍
+
+. * [] ^ $ \
+
+```shell
+# # Root password
+grep password /root/anaconda-ks.cfg
+# auth --enableshadow --passalgo=sha512
+# # Root password
+grep pass.... /root/anaconda-ks.cfg
+# # Root password
+grep pass....$ /root/anaconda-ks.cfg
+# auth --enableshadow --passalgo=sha512
+# # Root password
+grep pass.* /root/anaconda-ks.cfg
+# [Hh]ello
+# # ...
+grep ^# /root/anaconda-ks.cfg
+# V9N.V9Bg
+grep "\." /root/anaconda-ks.cfg
+```
+

@@ -1846,8 +1846,8 @@ test -f /etc/passwd
 ### 70 | if 判断的使用
 
 ```shell
-if [ $UID = 0 ] ; then echo "root user" ; fi
-if pwd ; then echo "pwd running" ; fi
+if [ $UID = 0 ]; then echo "root user"; fi
+if pwd; then echo "pwd running"; fi
 ```
 
 ### 71 | if-else 判断的使用
@@ -1855,23 +1855,23 @@ if pwd ; then echo "pwd running" ; fi
 ```shell
 #!/bin/bash
 
-if [ $USER = root ] ; then
-  echo "root user"
+if [ $USER = root ]; then
+	echo "root user"
 else
-  echo "other user"
-  echo $UID
+	echo "other user"
+	echo $UID
 fi
 ```
 
 ```shell
 #!/bin/bash
 
-if [ $USER = root ] ; then
-  echo "root user"
-elif [ $USER = admin ] ; then
-  echo "it's admin"
+if [ $USER = root ]; then
+	echo "root user"
+elif [ $USER = admin ]; then
+	echo "it's admin"
 else
-  echo "other user"
+	echo "other user"
 fi
 ```
 
@@ -1880,38 +1880,52 @@ fi
 ```shell
 #!/bin/bash
 
-if [ $UID = 0 ] ; then
-  echo "have permission"
-  if [ -x /tmp/x.sh ] ; then
-    echo "start running"
-    /tmp/x.sh
-  fi
+if [ $UID = 0 ]; then
+	echo "have permission"
+	if [ -x /tmp/x.sh ]; then
+		echo "start running"
+		/tmp/x.sh
+	fi
 else
-  echo "permission denied"
+	echo "permission denied"
 fi
 ```
 
 ### 73 | case 分支
 
 ```shell
-#/bin/bash
+#!/bin/bash
 
 case $1 in
-  "start" | "START")
-    echo "$0 start..."
-  ;;
+"start" | "START")
+	echo "$0 start..."
+	;;
 
-  "stop" | "STOP")
-    echo "$0 stop..."
-  ;;
+"stop" | "STOP")
+	echo "$0 stop..."
+	;;
 
-  "restart" | "RESTART" | "reload" | "RELOAD")
-    echo "$0 restart|reload..."
-  ;;
+"restart" | "RESTART" | "reload" | "RELOAD")
+	echo "$0 restart|reload..."
+	;;
 
-  *)
-    echo "usage: $0 {start|stop|restart|reload}"
-  ;;
+*)
+	echo "usage: $0 {start|stop|restart|reload}"
+	;;
 esac
+```
+
+### 74 | for 的基本使用
+
+```shell
+for i in {1..9}; do echo $i; done
+```
+
+```shell
+#/bin/bash
+
+for file in $(ls *.mp3); do
+	mv $file $(basename $file .mp3).mp4
+done
 ```
 

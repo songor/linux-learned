@@ -2089,3 +2089,23 @@ at> <EOT>
 
 **atq** lists the user's pending jobs
 
+### 84 | 周期性计划任务
+
+**crontab**
+
+\-l displays the current crontab on standard output
+
+\-e edits the current crontab
+
+配置格式：分钟 小时 日期 月份 星期 执行的命令
+
+```shell
+# crontab -e
+* * * * * /usr/bin/date >> /tmp/minute.txt
+* * * * * for i in `seq 60`; do /usr/bin/date; sleep 1; done >> /tmp/second.txt
+```
+
+cat /var/spool/cron/\<username\>
+
+tail -f /var/log/cron
+

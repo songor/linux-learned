@@ -1978,3 +1978,35 @@ for num in {1..9}; do
 done
 ```
 
+### 78 | 使用循环处理位置参数
+
+$1 $2 ... ${10} 命令行参数
+
+$0 脚本名称
+
+$* 和 $@ 所有位置参数
+
+$# 位置参数的数量
+
+```shell
+#!/bin/bash
+
+for arg in $*; do
+	if [ "$arg" = "help" ]; then
+		echo $arg $arg
+	fi
+done
+```
+
+```shell
+#!/bin/bash
+
+while [ $# -ge 1 ]; do
+	if [ "$1" = "help" ]; then
+		echo $1 $1
+	fi
+	# 参数左移
+	shift
+done
+```
+

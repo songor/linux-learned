@@ -1935,3 +1935,24 @@ done
 for ((i = 0; i <= 10; i++)); do echo $i; done
 ```
 
+### 76 | while 循环和 until 循环
+
+```shell
+while [ $x -lt 10 ]; do
+	echo $x
+	((x++))
+done
+```
+
+```shell
+until [ $x -gt 10 ]; do
+	echo $x
+	((x++))
+done
+```
+
+```shell
+# 死循环
+while :; do echo "loop"; done
+```
+

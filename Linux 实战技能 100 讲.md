@@ -1891,3 +1891,27 @@ else
 fi
 ```
 
+### 73 | case 分支
+
+```shell
+#/bin/bash
+
+case $1 in
+  "start" | "START")
+    echo "$0 start..."
+  ;;
+
+  "stop" | "STOP")
+    echo "$0 stop..."
+  ;;
+
+  "restart" | "RESTART" | "reload" | "RELOAD")
+    echo "$0 restart|reload..."
+  ;;
+
+  *)
+    echo "usage: $0 {start|stop|restart|reload}"
+  ;;
+esac
+```
+

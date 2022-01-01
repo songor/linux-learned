@@ -2215,3 +2215,56 @@ sed 一般用于对文件内容做替换
 
 awk 一般用于对文本内容进行统计，按需要的格式进行输出
 
+### 89 | sed 替换命令讲解
+
+**sed 的基本工作方式**
+
+将文件以行为单位读取到内存（模式空间）
+
+使用 sed 的每个脚本对该行进行操作
+
+处理完成后输出该行
+
+**替换命令 s**
+
+sed 's/old/new/' filename
+
+sed -e 's/old/new/' -e 's/old/new/' filename ...
+
+sed -i 's/old/new/' 's/old/new/' filename ...
+
+old new 正则表达式
+
+sed -r 扩展正则表达式
+
+```shell
+# echo a a a > x.txt
+# b a a
+sed 's/a/b/' x.txt
+# b b b
+sed 's/a/b/g' x.txt
+# echo / / / >> x.txt
+# ? / /
+sed 's@/@?@' x.txt
+# b a a
+# ? / /
+sed -e 's/a/b/' -e 's@/@?@' x.txt
+sed 's/a/b/;s@/@?@' x.txt
+# -i 替换原始文件
+sed 's/a/b/' x.txt > tmp.txt
+sed -i 's/a/b/' x.txt
+```
+
+```shell
+head -5 /etc/passwd | sed 's/...//'
+head -5 /etc/passwd | sed 's/s*bin//'
+grep root /etc/passwd | sed 's/^root//'
+sed 's/ab*/!/' y.txt
+sed -r 's/ab+/!/' y.txt
+sed -r 's/ab?/!/' y.txt
+# 回调
+# echo axyzb > z.txt
+# axyzb:axyzb
+sed -r 's/(a.*b)/\1:\1/' z.txt
+```
+

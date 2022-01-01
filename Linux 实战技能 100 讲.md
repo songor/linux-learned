@@ -2207,3 +2207,11 @@ find /etc/ -name *wd
 find /etc/ -regex .*wd
 ```
 
+### 88 | sed 和 awk 介绍
+
+sed awk 行编辑器
+
+sed 一般用于对文件内容做替换
+
+awk 一般用于对文本内容进行统计，按需要的格式进行输出
+

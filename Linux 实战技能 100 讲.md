@@ -2127,7 +2127,17 @@ flock -xn "/tmp/f.lock" -c "/root/x.sh"
 
 ### 86 | 元字符介绍
 
+**shell 通配符**
+
+\* ?  [] {}
+
+[命令行通配符教程](http://www.ruanyifeng.com/blog/2018/09/bash-wildcards.html)
+
+**元字符**
+
 . * [] ^ $ \
+
+[正则表达式 - 元字符](https://www.runoob.com/regexp/regexp-metachar.html)
 
 ```shell
 # # Root password

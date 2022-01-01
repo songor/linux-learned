@@ -2155,5 +2155,55 @@ grep pass.* /root/anaconda-ks.cfg
 grep ^# /root/anaconda-ks.cfg
 # V9N.V9Bg
 grep "\." /root/anaconda-ks.cfg
+# auth
+# #
+grep pass.* /root/anaconda-ks.cfg | cut -d " " -f 1
+# 42 /sbin/nologin
+cut -d ":" -f 7 /etc/passwd | sort | uniq -c | sort -r
+```
+
+### 87 | find 演示
+
+**扩展元字符**
+
+\+ ? |
+
+**find**
+
+find 默认使用通配符
+
+```shell
+# /etc/pam.d/passwd
+# /etc/passwd
+find /etc/ -name passwd
+# 通配符
+# /etc/openldap/certs/password
+# /etc/pam.d/password-auth-ac
+# /etc/pam.d/password-auth
+# /etc/pam.d/passwd
+# /etc/selinux/targeted/active/modules/100/passenger
+# /etc/passwd
+# /etc/passwd-
+find /etc/ -name pass*
+# 正则表达式
+# /etc/pam.d/passwd
+# /etc/security/opasswd
+# /etc/passwd
+find /etc/ -type f -regex .*wd
+# -mtime file's data was last modified n*24 hours ago
+find /etc/ -type f -atime 5 -regex .*wd
+# touch /tmp/{1..9}.txt
+find /tmp/{1..9}.txt -exec rm -v {} \;
+find /tmp/ -regex "\./[1-9]\.txt" -exec rm -v {} \;
+```
+
+```shell
+LANG=C stat <filename>
+```
+
+```shell
+# 正则匹配的是路径名称，-name 匹配的是文件或者文件夹名称
+find /etc/ -name *wd
+find /etc/ -regex .*wd
 ```
 

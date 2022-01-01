@@ -2305,3 +2305,27 @@ head -5 /etc/passwd | sed '/^bin/{s/bin/*/;s/nologin/*/}'
 -f
 ```
 
+### 91 | sed 其他常用命令
+
+```shell
+# 删除命令 d
+# 删除模式空间的内容，; 后面的指令不会执行
+# = 打印行号
+sed '/ab/d;=' y.txt
+# 追加命令 a，添加到匹配下一行
+sed '/ab/a xxx' y.txt 
+# 插入命令 i，添加到匹配上一行
+sed '/ab/i xxx' y.txt 
+# 更改命令 c，替换匹配行
+sed '/ab/c xxx' y.txt
+# 读取文件 r，追加到匹配行下一行
+sed '/ab/r x.txt' y.txt
+# 写入文件 w
+sed '/ab/w tmp.txt' y.txt
+# 退出命令 q
+# seq 1 1000000 > lines.txt
+# wc -l lines.txt
+time sed 10q lines.txt
+time sed -n 1,10p lines.txt
+```
+

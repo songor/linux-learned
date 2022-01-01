@@ -2233,7 +2233,7 @@ sed -e 's/old/new/' -e 's/old/new/' filename ...
 
 sed -i 's/old/new/' 's/old/new/' filename ...
 
-old new 正则表达式
+old 正则表达式
 
 sed -r 扩展正则表达式
 
@@ -2266,5 +2266,42 @@ sed -r 's/ab?/!/' y.txt
 # echo axyzb > z.txt
 # axyzb:axyzb
 sed -r 's/(a.*b)/\1:\1/' z.txt
+```
+
+### 90 | sed 替换指令加强版
+
+全局替换 / 标志位 / 寻址 / 分组 / sed 脚本文件
+
+```shell
+# 标志位
+# 全局替换
+s/old/new/g
+# / 和正则匹配的内容冲突
+s@old@new@g
+# 替换每行的全部
+head -5 /etc/passwd | sed 's/root/*/g'
+# 替换每行的第 2 个
+head -5 /etc/passwd | sed 's/root/*/2'
+# 仅输出替换成功行
+# -n 阻止默认输出
+# p 打印模式空间的内容
+head -5 /etc/passwd | sed -n 's/root/*/p'
+# 将替换成功行写入文件
+# w 将模式空间的内容写入到文件
+head -5 /etc/passwd | sed -n 's/root/*/w /tmp/tmp.txt'
+# 寻址（指定范围）
+# /正则表达式/s/old/new/
+head -5 /etc/passwd | sed '/daemon/s/nologin/*/'
+head -5 /etc/passwd | sed '/^bin/s/nologin/*/'
+# 行号s/old/new/，行号可以是具体的行，也可以是最后一行 $ 符号，可以使用两个寻址符号
+head -5 /etc/passwd | sed '1s/bin/*/'
+head -5 /etc/passwd | sed '1,3s/bin/*/'
+head -5 /etc/passwd | sed '1,$s/bin/*/'
+# 可以混合使用行号和正则地址
+head -5 /etc/passwd | sed '/^bin/,$s/nologin/*/'
+# 分组
+head -5 /etc/passwd | sed '/^bin/{s/bin/*/;s/nologin/*/}'
+# 脚本文件
+-f
 ```
 

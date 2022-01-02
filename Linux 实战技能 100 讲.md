@@ -2329,3 +2329,28 @@ time sed 10q lines.txt
 time sed -n 1,10p lines.txt
 ```
 
+### 92 | sed 多行模式空间
+
+使用 XML 或 JSON 格式的配置文件，为多行出现
+
+N 将下一行加入到模式空间
+
+D 删除模式空间中的第一个字符到第一个换行符
+
+P 打印模式空间中的第一个字符到第一个换行符
+
+```shell
+# hel
+# lo
+# *
+sed 'N;s/hel\nlo/*/' x.txt
+# . 匹配换行符
+sed 'N;s/hel.lo/*/' x.txt
+# cat << EOF > y.txt
+# > hell
+# > o bash hel
+# > lo bash
+# > EOF
+sed 'N;s/\n//;s/hello bash/hello sed\n/;P;D' y.txt
+```
+

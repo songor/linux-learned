@@ -2354,3 +2354,21 @@ sed 'N;s/hel.lo/*/' x.txt
 sed 'N;s/\n//;s/hello bash/hello sed\n/;P;D' y.txt
 ```
 
+### 93 | 什么是 sed 保持空间
+
+覆盖 / 追加
+
+h H 将模式空间内容存放到保持空间
+
+g G 将保持空间内容取出到模式空间
+
+x 交叉模式空间和保持空间内容
+
+```shell
+# 反转
+head -6 /etc/passwd | cat -n | tac
+cat -n /etc/passwd | head -6 | sed -n '1h;1!G;$!x;$p'
+cat -n /etc/passwd | head -6 | sed -n '1!G;h;$p'
+cat -n /etc/passwd | head -6 | sed '1!G;h;$!d'
+```
+

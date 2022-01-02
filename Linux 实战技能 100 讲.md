@@ -2468,6 +2468,33 @@ if while do for
 # > EOF
 awk '{if($2>=80) print $1}' kpi.txt
 awk '{if($2>=80){print $1;print $2}}' kpi.txt
-awk 'sum=0;{for(i=2;i<=NF;i++) sum+=$i;print sum/(NF-1)}' kpi.txt
+# 每行平均值
+awk '{sum=0;for(i=2;i<=NF;i++) sum+=$i;print sum/(NF-1)}' kpi.txt
+```
+
+### 98 | awk 数组
+
+```shell
+# 全部行平均值
+awk '{sum=0;for(i=2;i<=NF;i++) sum+=$i;avg[$1]=sum/(NF-1)}END{for(user in avg) avgsum=avgsum+=avg[user];print avgsum/NR}' kpi.txt
+# 保存到文件
+vim avg.awk
+{sum=0;for(i=2;i<=NF;i++) sum+=$i;avg[$1]=sum/(NF-1)}END{for(user in avg) avgsum=avgsum+=avg[user];print avgsum/NR}
+awk -f avg.awk kpi.txt
+```
+
+**命令行参数数组**
+
+ARGC ARGV
+
+```shell
+vim arg.awk 
+BEGIN{for(arg=0;arg<ARGC;arg++) print ARGV[arg];print ARGC}
+# awk
+# a
+# b
+# c
+# 4 
+awk -f arg.awk a b c
 ```
 

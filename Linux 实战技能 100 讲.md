@@ -2403,6 +2403,54 @@ awk 可以使用 -F 选项改变字段分隔符
 分隔符可以使用正则表达式
 
 ```shell
-awk -F "'" '/^menu/{ print x++,$2 }' /boot/grub2/grub.cfg
+awk -F "'" '/^menu/{print x++,$2}' /boot/grub2/grub.cfg
 ```
+
+### 96 | awk 表达式
+
+**赋值操作符**
+
+= ++ -- += -= *= /= %= ^=
+
+**算数操作符**
+
+\+ - * / % ^
+
+**系统变量**
+
+FS 和 OFS 字段分隔符，FS 表示输入的字段分隔符，OFS 表示输出的字段分隔符，默认为空格
+
+```shell
+head -5 /etc/passwd | awk -F ':' '{print $1}'
+head -5 /etc/passwd | awk 'BEGIN{FS=":"}{print $1}'
+head -5 /etc/passwd | awk 'BEGIN{FS=":";OFS=";"}{print $1,$2}'
+```
+
+RS 记录分隔符，默认为 \n
+
+```shell
+head -5 /etc/passwd | awk 'BEGIN{RS=":"}{print $0}'
+```
+
+NR 和 FNR 行数，FNR 区分文件重新计数
+
+```shell
+head -5 /etc/passwd | awk '{print NR,$0}'
+awk '{print FNR,$0}' /etc/hosts /etc/hosts
+```
+
+NF 字段数量，最后一个字段内容可以用 $NF 取出
+
+```shell
+head -5 /etc/passwd | awk 'BEGIN{FS=":"}{print NF}'
+head -5 /etc/passwd | awk 'BEGIN{FS=":"}{print $NF}'
+```
+
+**关系操作符**
+
+< > <= >= == != ~ !~
+
+**布尔操作符**
+
+&& || ! 
 

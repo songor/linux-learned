@@ -2454,3 +2454,20 @@ head -5 /etc/passwd | awk 'BEGIN{FS=":"}{print $NF}'
 
 && || ! 
 
+### 97 | awk 判断和循环
+
+if while do for
+
+```shell
+# cat <<EOF > kpi.txt
+# > user1 70 72 74 76 74 72
+# > user2 80 82 84 82 80 78
+# > user3 60 61 62 63 64 65
+# > user4 90 89 88 87 86 85
+# > user5 45 60 63 62 61 50
+# > EOF
+awk '{if($2>=80) print $1}' kpi.txt
+awk '{if($2>=80){print $1;print $2}}' kpi.txt
+awk 'sum=0;{for(i=2;i<=NF;i++) sum+=$i;print sum/(NF-1)}' kpi.txt
+```
+

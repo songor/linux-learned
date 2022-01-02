@@ -2498,3 +2498,44 @@ BEGIN{for(arg=0;arg<ARGC;arg++) print ARGV[arg];print ARGC}
 awk -f arg.awk a b c
 ```
 
+### 99 | awk 数组功能的使用
+
+```shell
+{
+sum=0
+for(i=2;i<=NF;i++)
+  sum+=$i
+avg[$1]=sum/(NF-1)
+
+if(avg[$1]>=80)
+  score="S"
+else if(avg[$1]>=70)
+  score="A"
+else if(avg[$1]>=60)
+  score="B"
+else
+  score="C"
+scores[score]++
+print $1,avg[$1],score
+}
+END{
+for(user in avg)
+  avg_sum+=avg[user]
+avg_avg=avg_sum/NR
+print "average",avg_avg
+
+for(user in avg)
+  if(avg[user]>avg_avg)
+    above++
+  else
+    below++
+print "above",above
+print "below",below
+
+print "S",scores["S"]
+print "A",scores["A"]
+print "B",scores["B"]
+print "C",scores["C"]
+}
+```
+

@@ -2691,3 +2691,36 @@ telnet localhost
 yum install wireshark-gnome -y
 ```
 
+### 107 | SSH 服务
+
+**配置文件**
+
+客户端 /etc/ssh/ssh_config
+
+服务端 /etc/ssh/sshd_config
+
+```shell
+# Port 22
+netstat -ntpl | grep 22
+# systemctl status | start | stop | restart | enable | disable sshd.service
+systemctl restart sshd.service
+# PermitRootLogin yes
+AuthorizedKeysFile .ssh/authorized_keys
+```
+
+```shell
+# SecureCRT / Xshell / putty
+# 密码认证
+ssh -p 22 root@47.93.56.143
+who
+# 密钥认证
+# ssh-keygen -t rsa
+# ssh-copy-id
+ssh-copy-id -i id_rsa.pub root@47.93.56.143
+ssh root@47.93.56.143
+ls -l /root/.ssh/authorized_keys
+# scp 文件拷贝
+scp x.txt root@47.93.56.143:/tmp/
+scp root@47.93.56.143:/tmp/x.txt ./
+```
+

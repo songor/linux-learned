@@ -2539,3 +2539,29 @@ print "C",scores["C"]
 }
 ```
 
+### 100 | awk 函数
+
+**算数函数**
+
+sin() cos()
+
+int()
+
+rand() srand()
+
+```shell
+awk 'BEGIN{pi=3.14;print int(pi)}'
+awk 'BEGIN{srand();print rand()}'
+```
+
+**字符串函数**
+
+gsub(r,s,t) index(s,t) length(s) match(s,r) split(s,a,sep) sub(r,s,t) substr(s,p,n)
+
+**自定义函数**
+
+```shell
+awk 'function f(){return 0} BEGIN{print f()}'
+awk 'function double(str){return str str} BEGIN{print double("awk")}'
+```
+

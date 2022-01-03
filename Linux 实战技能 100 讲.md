@@ -2724,3 +2724,15 @@ scp x.txt root@47.93.56.143:/tmp/
 scp root@47.93.56.143:/tmp/x.txt ./
 ```
 
+### 108 | FTP 服务器 vsftpd 介绍与软件包安装
+
+```shell
+yum install vsftpd ftp -y
+systemctl start vsftpd.service
+systemctl enable vsftpd.service
+# localhost
+ftp localhost
+# 匿名用户 ftp / 空密码，回车 /var/ftp
+# 本地账号 /home/xxx
+```
+

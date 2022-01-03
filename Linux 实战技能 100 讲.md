@@ -2596,3 +2596,25 @@ iptables -vnL
 iptables -t filter -A INPUT -s 10.0.0.1 -j ACCEPT
 ```
 
+### 103 | iptables 过滤规则的使用
+
+```shell
+# -A / -I
+iptables -A INPUT -s 10.0.0.2 -j ACCEPT
+iptables -A INPUT -s 10.0.0.2 -j DROP
+iptables -I INPUT -s 10.0.0.3 -j DROP
+iptables -A INPUT -s 10.0.0.0/24 -j ACCEPT
+# 默认 policy
+iptables -P INPUT DROP
+# -F 清空
+iptables -F
+# -D 删除
+iptables -D INPUT 1
+# -N -X -E 自定义规则
+# -i eth0
+iptables -I INPUT -s 10.0.0.4 -i eth0 -j DROP
+# -p tcp udp icmp
+iptables -t filter -A INPUT -i eth0 -s 10.0.0.5 -p tcp --dport 80 -j ACCEPT
+iptables -t filter -A INPUT -j DROP
+```
+

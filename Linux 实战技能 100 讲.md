@@ -2637,3 +2637,34 @@ yum install iptables-services
 
 service iptables save | start | stop | restart
 
+### 105 | firewalld
+
+支持区域 zone 概念
+
+firewall-cmd
+
+systemctl start | stop | enable | disable firewalld.service
+
+```shell
+# systemctl
+service iptables stop
+systemctl start firewalld.service
+systemctl status firewalld.service
+# firewall-cmd
+firewall-cmd --state
+firewall-cmd --list-all
+firewall-cmd --zone=public --list-services
+firewall-cmd --get-zones
+firewall-cmd --get-default-zone
+firewall-cmd --get-active-zone
+# service
+firewall-cmd --add-service=https
+# port
+# --permanent 永久生效，需要重新加载
+firewall-cmd --add-port=8080/tcp --permanent
+# --reload 临时规则被清除
+firewall-cmd --reload
+# source
+firewall-cmd --remove-source=10.0.0.1
+```
+

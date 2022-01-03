@@ -2618,3 +2618,22 @@ iptables -t filter -A INPUT -i eth0 -s 10.0.0.5 -p tcp --dport 80 -j ACCEPT
 iptables -t filter -A INPUT -j DROP
 ```
 
+### 104 | iptables nat 表的使用
+
+PREROUTING 目的地址转换
+
+POSTROUTING 源地址转换
+
+```shell
+iptables -t nat -A PREROUTING -i eth0 -d 114.115.116.117 -p tcp --dport 80 -j DNAT --to-destination 10.0.0.1
+iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -o eth0 -j SNAT --to-source 111.112.113.114
+```
+
+**iptables 配置文件**
+
+/etc/sysconfig/iptables
+
+yum install iptables-services
+
+service iptables save | start | stop | restart
+

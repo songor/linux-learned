@@ -2583,3 +2583,16 @@ CentOS 7 默认防火墙 firewallD
 
 规则链 INPUT OUTPUT FORWARD PREROUTING POSTROUTING
 
+### 102 | iptables 规则的基本使用
+
+iptables -t 规则表 命令 规则链 规则
+
+```shell
+# -n 不解析域名
+# -v 详细
+iptables -t filter -vnL
+# filter
+iptables -vnL
+iptables -t filter -A INPUT -s 10.0.0.1 -j ACCEPT
+```
+

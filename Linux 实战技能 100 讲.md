@@ -2668,3 +2668,26 @@ firewall-cmd --reload
 firewall-cmd --remove-source=10.0.0.1
 ```
 
+### 106 | SSH 介绍之 Telnet 明文漏洞
+
+```shell
+yum install telnet telnet-server xinetd -y
+systemctl start xinetd.service
+systemctl start telnet.socket
+# 23/tcp
+grep telnet /etc/services
+# iptables
+iptables -I INPUT -p tcp --dport=23 -j ACCEPT
+# firewalld
+firewall-cmd --permanent --add-port=23/tcp
+firewall-cmd --reload
+```
+
+```shell
+# 抓包
+tcpdump -i any port 23 -s 1500 -w /tmp/23.dump
+telnet localhost
+# wireshark
+yum install wireshark-gnome -y
+```
+

@@ -2736,3 +2736,36 @@ ftp localhost
 # 本地账号 /home/xxx
 ```
 
+### 109 | vsftpd 配置文件介绍
+
+/etc/vsftpd/vsftpd.conf
+
+/etc/vsftpd/ftpusers
+
+/etc/vsftpd/user_list
+
+```shell
+# vsftpd.conf
+anonymous_enable=YES
+local_enable=YES
+write_enable=YES
+# 主动传输模式
+connect_from_port_20=YES
+# man 5 vsftpd.conf
+# 黑名单 / 白名单
+userlist_enable=YES
+# systemctl
+systemctl restart vsftpd
+# SELinux
+getsebool -a | grep ftpd
+setsebool -P ftpd_xxx 1
+# firewalld
+firewall-cmd --add-service ftp
+# 远程
+ftp 47.93.56.143
+# 上传
+put x.txt
+# 下载
+get x.txt
+```
+

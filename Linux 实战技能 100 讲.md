@@ -2565,3 +2565,21 @@ awk 'function f(){return 0} BEGIN{print f()}'
 awk 'function double(str){return str str} BEGIN{print double("awk")}'
 ```
 
+## 第六章 服务管理篇
+
+### 101 | 防火墙概述
+
+**软件**、硬件防火墙
+
+**包过滤**、应用层防火墙
+
+CentOS 6 默认防火墙 iptables
+
+CentOS 7 默认防火墙 firewallD
+
+**iptables 表和链**
+
+规则表 filter nat mangle raw
+
+规则链 INPUT OUTPUT FORWARD PREROUTING POSTROUTING
+

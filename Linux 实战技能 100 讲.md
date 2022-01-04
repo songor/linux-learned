@@ -2769,3 +2769,48 @@ put x.txt
 get x.txt
 ```
 
+### 110 | vsftp 虚拟用户
+
+```shell
+# 创建虚拟用户
+useradd vuser -d /data/ftp -s /sbin/nologin
+cd /etc/vsftpd/
+vim vuser.temp
+vu1
+123456
+vu2
+123456
+vu3
+123456
+db_load -T -t hash -f /etc/vsftpd/vuser.temp /etc/vsftpd/vuser.db
+chmod 600 /etc/vsftpd/vuser.db
+# PAM
+vim /etc/pam.d/vsftpd.vuser
+auth sufficient /lib64/security/pam_userdb.so db=/etc/vsftpd/vuser
+account sufficient /lib64/security/pam_userdb.so db=/etc/vsftpd/vuser
+# vsftpd.conf
+vim /etc/vsftpd/vsftpd.conf
+guest_enable=YES
+guest_username=vuser
+allow_writeable_chroot=YES
+pam_service_name=vsftpd.vuser
+user_config_dir=/etc/vsftpd/vuserconfig
+# vuserconfig
+mkdir -p /etc/vsftpd/vuserconfig
+vim vu1
+local_root=/data/ftp
+write_enable=YES
+anon_umask=022
+anon_world_readable_only=NO
+anon_upload_enable=YES
+anon_mkdir_write_enable=YES
+anon_other_write_enable=YES
+download_enable=YES
+# 重启
+systemctl restart vsftpd.service
+# 登陆
+ftp 47.93.56.143
+vu1
+123456
+```
+

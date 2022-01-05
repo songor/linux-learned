@@ -2814,3 +2814,31 @@ vu1
 123456
 ```
 
+### 111 | samba 服务
+
+```shell
+yum install samba -y
+yum install cifs-utils -y
+mkdir -p /data/share
+vim /etc/samba/smb.conf
+[share]
+        comment = Share Directories
+        path = /data/share
+        read only = No
+# 创建 & 关联用户
+useradd samba
+smbpasswd -a samba
+# samba.123
+# 查看用户
+pdbedit -L
+# 删除用户
+# smbpasswd -x samba
+systemctl start smb.service
+# 挂载 /home/samba
+mount -t cifs -o username=samba //127.0.0.1/samba /mnt
+# 挂载 /data/share
+mount -t cifs -o username=samba //127.0.0.1/share /mnt
+# 卸载
+# umount /mnt/
+```
+

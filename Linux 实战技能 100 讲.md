@@ -2842,3 +2842,17 @@ mount -t cifs -o username=samba //127.0.0.1/share /mnt
 # umount /mnt/
 ```
 
+### 112 | NFS 服务
+
+```shell
+yum install nfs-utils -y
+vim /etc/exports
+chown -R nfsnobody:nfsnobody /data/share/
+# 配置
+/data/share *(rw,sync,all_squash)
+systemctl start nfs.service
+# 客户端挂载
+showmount -e localhost
+mount -t nfs localhost:/data/share /mnt
+```
+

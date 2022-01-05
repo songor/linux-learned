@@ -2856,3 +2856,14 @@ showmount -e localhost
 mount -t nfs localhost:/data/share /mnt
 ```
 
+### 113 | Nginx 基本配置文件
+
+```shell
+yum install yum-utils -y
+yum-config-manager --add-repo https://openresty.org/package/centos/openresty.repo
+yum install openresty -y
+# 配置
+/usr/local/openresty/nginx/conf/nginx.conf
+service openresty start
+```
+

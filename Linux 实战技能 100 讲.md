@@ -2867,3 +2867,45 @@ yum install openresty -y
 service openresty start
 ```
 
+### 114 | 使用 Nginx 配置域名虚拟主机
+
+```shell
+vim nginx.conf
+server {
+    listen       8080;
+    server_name  www.server-a.com;
+
+    location / {
+        root   html/server-a;
+        index  index.html index.htm;
+    }
+}
+server {
+    listen       8080;
+    server_name  www.server-b.com;
+
+    location / {
+        root   html/server-b;
+        index  index.html index.htm;
+    }
+}
+```
+
+```shell
+cd /usr/local/openresty/nginx/sbin/
+./nginx -t
+# ./nginx -s stop
+# ./nginx
+./nginx -s reload
+netstat -ntpl | grep nginx
+cd /usr/local/openresty/nginx/html
+mkdir server-a server-b
+echo server-a > server-a/index.html
+echo server-b > server-b/index.html
+# 域名
+vim /etc/hosts
+127.0.0.1 www.server-a.com www.server.b.com
+# 测试
+curl http://www.server-a.com:8080/
+```
+

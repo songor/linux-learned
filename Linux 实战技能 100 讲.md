@@ -2870,6 +2870,7 @@ service openresty start
 ### 114 | 使用 Nginx 配置域名虚拟主机
 
 ```shell
+cd /usr/local/openresty/nginx/conf
 vim nginx.conf
 server {
     listen       8080;
@@ -2908,4 +2909,47 @@ vim /etc/hosts
 # 测试
 curl http://www.server-a.com:8080/
 ```
+
+### 115 | LNMP 环境搭建
+
+LAMP Linux + Apache + PHP + MySQL
+
+LNMP ~~Apache~~ -> Nginx
+
+ ```shell
+ # MySQL
+ yum install mariadb mariadb-server -y
+ # 配置
+ vim /etc/my.cnf
+ [mysqld]
+ character_set_server=utf8
+ init_connect='SET NAMES utf8'
+ # 启动
+ systemctl start mariadb.service
+ mysql
+ show variables like '%character_set%';
+ # PHP
+ yum install php-fpm php-mysql -y
+ systemctl start php-fpm.service
+ # Nginx
+ cd /usr/local/openresty/nginx/conf
+ vim nginx.conf
+ location ~ \.php$ {
+     root           html;
+     fastcgi_pass   127.0.0.1:9000;
+     fastcgi_index  index.php;
+     fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+     include        fastcgi_params;
+ }
+ ./nginx -s reload
+ # index.php
+ cd /usr/local/openresty/nginx/html
+ <?php
+ phpinfo();
+ ?>
+ # 浏览器
+ # 安全组入方向规则添加 TCP 80 端口
+ # firewall-cmd --add-service=http --permanent
+ http://47.93.56.143/index.php
+ ```
 

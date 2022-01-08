@@ -2955,3 +2955,11 @@ LNMP ~~Apache~~ -> Nginx
 
 ### 116 | DNS 服务的原理
 
+### 117 | NAS 演示
+
+Network Attached Storage 网络附属存储
+
+NAS 支持的协议 NFS、CIFS、FTP
+
+保证数据安全方式 磁盘阵列
+
